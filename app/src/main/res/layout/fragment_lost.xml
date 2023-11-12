@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Name" />
+            android:hint="Title" />
 
         <EditText
             android:id="@+id/editTextTextMultiLine2"
@@ -35,7 +35,9 @@
             android:layout_height="115dp"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:hint="Description"
+            />
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -43,10 +45,16 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_camera" />
         <Spinner
-            android:id="@+id/planets_spinner"
+            android:id="@+id/region_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
+        <Spinner
+            android:id="@+id/ville_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            />
     </LinearLayout>
 </FrameLayout>

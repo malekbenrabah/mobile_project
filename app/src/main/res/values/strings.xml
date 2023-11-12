@@ -47,14 +47,19 @@
     </string>
 
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="regions_array">
+        <item>Tunis</item>
+        <item>Sousse</item>
     </string-array>
+
+    <string-array name="tunis_villes_array">
+        <item>Ariana</item>
+        <item>La Marsa</item>
+    </string-array>
+
+    <string-array name="sousse_villes_array">
+        <item>Sousse City</item>
+        <item>Monastir</item>
+    </string-array>
+
 </resources>
