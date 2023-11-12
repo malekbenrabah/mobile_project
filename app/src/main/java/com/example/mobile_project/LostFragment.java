@@ -1,5 +1,7 @@
 package com.example.mobile_project;
 
+import static com.example.mobile_project.database.AppDatabase.ioThread;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,6 +56,7 @@ public class LostFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lost, container, false);
 
+        database = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
         sp = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
 
         spinnerRegion = view.findViewById(R.id.region_spinner);
@@ -107,42 +110,46 @@ public class LostFragment extends Fragment {
 
         btn = view.findViewById(R.id.add);
         btn.setOnClickListener(view1 -> {
+            ioThread(() -> {
 
-            String selectedRegion = spinnerRegion.getSelectedItem().toString();
-            String selectedVille = spinnerVille.getSelectedItem().toString();
+                String selectedRegion = spinnerRegion.getSelectedItem().toString();
+                String selectedVille = spinnerVille.getSelectedItem().toString();
 
-            boolean isValid = true;
+                boolean isValid = true;
 
-            if (titre.getText().toString().trim().isEmpty()) {
-                titreError.setText("Le titre est requis");
-                isValid = false;
-            }
-
-            if(isValid){
-                int userId = sp.getInt("userId", -1);
-                String typePost = sp.getString("typePost","");
-                String current_Date=getCurrentDate();
-                System.out.println("userId: "+userId+" current_date : "+current_Date+" type post :"+ typePost);
-
-                Post post = new Post();
-                post.setTitle(titre.getText().toString());
-                post.setDescription(description.getText().toString());
-                post.setUserId(userId);
-                post.setPhoto("testphoto");
-                post.setCreated_at(current_Date);
-                post.setVille(selectedVille);
-                post.setRegion(selectedRegion);
-                post.setPost_type(typePost);
-
-                database.postDao().insertPost(post);
-                List<Post> posts = database.postDao().getAll();
-                for (Post p : posts) {
-                    System.out.println("post info : " + p);
+                if (titre.getText().toString().trim().isEmpty()) {
+                    titreError.setText("Le titre est requis");
+                    isValid = false;
                 }
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame,new HomeFragment()).commit();
+                if (isValid) {
 
-            }
+                        int userId = sp.getInt("userId", -1);
+                        String typePost = sp.getString("typePost", "");
+                        String current_Date = getCurrentDate();
+                        System.out.println("userId: " + userId + " current_date : " + current_Date + " type post :" + typePost);
+
+                        Post post = new Post();
+                        post.setTitle(titre.getText().toString());
+                        post.setDescription(description.getText().toString());
+                        post.setUserId(userId);
+                        post.setPhoto("testphoto");
+                        post.setCreated_at(current_Date);
+                        post.setVille(selectedVille);
+                        post.setRegion(selectedRegion);
+                        post.setPost_type(typePost);
+
+                        database.postDao().insertPost(post);
+                        List<Post> posts = database.postDao().getAll();
+                        for (Post p : posts) {
+                            System.out.println("post info : " + p);
+                        }
+                    getActivity().runOnUiThread(() -> {
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame, new HomeFragment()).commit();
+                    });
+                }
+
+            });
 
 
         });

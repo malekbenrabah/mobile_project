@@ -31,4 +31,8 @@ public interface UserDao {
     User getUserByUsername(String username);
 
 
+    @Query("SELECT * FROM  user where userName=:userName AND password=:password")
+    User authenticate(String userName, String password);
+
+
 }
