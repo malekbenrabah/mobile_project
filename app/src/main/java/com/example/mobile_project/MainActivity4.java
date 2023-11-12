@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.mobile_project.dao.UserDao;
 import com.example.mobile_project.database.AppDatabase;
 import com.example.mobile_project.entity.User;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -72,7 +71,7 @@ public class MainActivity4 extends AppCompatActivity {
             boolean isValid = true;
 
             if (username.getText().toString().trim().isEmpty()) {
-                setError("Le nom d'utilisateur est requis.", R.id.userNameError);
+                setError("Le nom d'utilisateur est requis.", R.id.titreError);
                 isValid = false;
             }
 
@@ -150,7 +149,7 @@ public class MainActivity4 extends AppCompatActivity {
     }
 
     private void clearErrors() {
-        TextView userNameError = findViewById(R.id.userNameError);
+        TextView userNameError = findViewById(R.id.titreError);
         TextView phoneError = findViewById(R.id.phoneError);
         TextView emailError = findViewById(R.id.emailError);
         TextView passwordError = findViewById(R.id.passwordError);

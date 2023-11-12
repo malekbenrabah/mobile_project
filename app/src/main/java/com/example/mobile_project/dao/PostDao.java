@@ -15,8 +15,8 @@ public interface PostDao {
     @Insert
     void insertPost(Post post);
 
-    @Query("SELECT * FROM post")
-    List<User> getAll();
+    @Query("select * from post")
+    List<Post> getAll();
 
 
 }

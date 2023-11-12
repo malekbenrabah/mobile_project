@@ -31,6 +31,8 @@ public class Post {
 
     private String region;
 
+    private String post_type;
+
     @ColumnInfo(name = "userId")
     private int userId;
 
@@ -137,18 +139,27 @@ public class Post {
         this.commentaires = commentaires;
     }
 
+    public String getPost_type() {
+        return post_type;
+    }
+
+    public void setPost_type(String post_type) {
+        this.post_type = post_type;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", created_at=" + created_at +
-                ", userId=" + userId +
+                ", created_at='" + created_at + '\'' +
                 ", photo='" + photo + '\'' +
-                ", commentaires=" + commentaires +
                 ", ville='" + ville + '\'' +
                 ", region='" + region + '\'' +
+                ", post_type='" + post_type + '\'' +
+                ", userId=" + userId +
+                ", commentaires=" + commentaires +
                 '}';
     }
 }

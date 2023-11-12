@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mobile_project.database.AppDatabase;
+import com.example.mobile_project.entity.User;
 
 public class MainActivity3 extends AppCompatActivity {
 
@@ -49,12 +50,15 @@ public class MainActivity3 extends AppCompatActivity {
 
             if(database.userDao().login(loginEt.getText().toString(), pwdEt.getText().toString())) {
 
+                User user= database.userDao().getUserByUsername(loginEt.getText().toString());
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("userId", user.getId());
+
                 if (rememberMe.isChecked()) {
-                    SharedPreferences.Editor editor = sp.edit();
                     editor.putString("userName",loginEt.getText().toString());
                     editor.putString("pwd",pwdEt.getText().toString());
-                    editor.commit();
                 }
+                editor.commit();
 
                 Intent intent = new Intent(this, MainActivity2.class);
                 startActivity(intent);
