@@ -1,5 +1,6 @@
 package com.example.mobile_project.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -25,8 +26,8 @@ public interface UserDao {
     boolean login(String userName, String password);
 
     @Query("SELECT * FROM user")
-    List<User> getAll();
+    LiveData<List<User>> findAllUsers();
 
     @Query("SELECT * FROM user WHERE username = :username")
-    User getUserByUsername(String username);
+    LiveData<User> findByUsername(String username);
 }

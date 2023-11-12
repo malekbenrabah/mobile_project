@@ -24,6 +24,16 @@ public class Post {
 
     private String created_at;
 
+    public PostType getType() {
+        return type;
+    }
+
+    public void setType(PostType type) {
+        this.type = type;
+    }
+
+    private PostType type;
+
 
     private String photo;
 
@@ -34,13 +44,11 @@ public class Post {
     @ColumnInfo(name = "userId")
     private int userId;
 
-    private List<Integer> commentaires;
-
     public Post() {
     }
 
     @Ignore
-    public Post(String title, String description, String created_at, int userId, String photo, String ville, String region, List<Integer> commentaires) {
+    public Post(String title, String description, String created_at, int userId, String photo, String ville, String region, PostType type) {
         this.title = title;
         this.description = description;
         this.created_at = created_at;
@@ -48,7 +56,7 @@ public class Post {
         this.photo = photo;
         this.ville = ville;
         this.region = region;
-        this.commentaires = commentaires;
+        this.type = type;
     }
 
     public String getCurrentDate(){
@@ -129,14 +137,6 @@ public class Post {
         this.created_at = created_at;
     }
 
-    public List<Integer> getCommentaires() {
-        return commentaires;
-    }
-
-    public void setCommentaires(List<Integer> commentaires) {
-        this.commentaires = commentaires;
-    }
-
     @Override
     public String toString() {
         return "Post{" +
@@ -146,9 +146,9 @@ public class Post {
                 ", created_at=" + created_at +
                 ", userId=" + userId +
                 ", photo='" + photo + '\'' +
-                ", commentaires=" + commentaires +
                 ", ville='" + ville + '\'' +
                 ", region='" + region + '\'' +
+                "type='"+ type + '\''+
                 '}';
     }
 }

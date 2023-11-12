@@ -30,22 +30,16 @@ public class User {
     @ColumnInfo(name="photo")
     private String photo;
 
-
-    private List<Integer> posts= new ArrayList<>();
-
-
-
     public User() {
     }
 
     @Ignore
-    public User(String userName, int phone, String email, String password, String photo, List<Integer> posts) {
+    public User(String userName, int phone, String email, String password, String photo) {
         this.userName = userName;
         this.phone = phone;
         this.email = email;
         this.password = password;
         this.photo = photo;
-        this.posts = posts;
     }
 
 
@@ -97,14 +91,6 @@ public class User {
         this.photo = photo;
     }
 
-    public List<Integer> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Integer> posts) {
-        this.posts = posts;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -114,7 +100,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", photo='" + photo + '\'' +
-                ", posts=" + posts +
                 '}';
     }
 }
