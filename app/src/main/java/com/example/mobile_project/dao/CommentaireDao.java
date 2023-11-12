@@ -16,5 +16,5 @@ public interface CommentaireDao {
     void insertCommentaire(Commentaire commentaire);
 
     @Query("SELECT * FROM commentaire")
-    List<User> getAll();
+    List<Commentaire> getAll();
 }

@@ -47,12 +47,14 @@ public class MainActivity3 extends AppCompatActivity {
                 if (user != null) {
                     System.out.println(user);
                     runOnUiThread(() -> {
+
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putInt("userId", user.getId());
                         if (rememberMe.isChecked()) {
-                            SharedPreferences.Editor editor = sp.edit();
                             editor.putString("userName", loginEt.getText().toString());
                             editor.putString("pwd", pwdEt.getText().toString());
-                            editor.apply();
                         }
+                        editor.apply();
 
                         Intent intent = new Intent(this, MainActivity2.class);
                         startActivity(intent);

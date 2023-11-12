@@ -16,7 +16,7 @@ public interface PostDao {
     void insertPost(Post post);
 
     @Query("SELECT * FROM post")
-    List<User> getAll();
+    List<Post> getAll();
 
 
 }
