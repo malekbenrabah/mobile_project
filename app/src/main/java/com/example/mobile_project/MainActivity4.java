@@ -41,7 +41,7 @@ public class MainActivity4 extends AppCompatActivity {
 
         signup.setOnClickListener(view -> {
             ioThread(() -> {
-                if (database.userDao().login(username.getText().toString(), email.getText().toString())) {
+                if (database.userDao().authenticate(username.getText().toString(), email.getText().toString()) != null) {
                     runOnUiThread(() -> {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         builder.setMessage("Le nom d'utilisateur ou l'e-mail existe déjà. Veuillez en choisir un autre.")
@@ -53,7 +53,7 @@ public class MainActivity4 extends AppCompatActivity {
                         dialog.show();
                     });
                 } else {
-                    User user = new User(username.getText().toString(), Integer.parseInt(phone.getText().toString()), email.getText().toString(), password.getText().toString(), "aaaaaa");
+                    User user = new User(username.getText().toString(), Integer.parseInt(phone.getText().toString()), email.getText().toString(), password.getText().toString(), "aaaaaa", "tunis");
                     database.userDao().insertUser(user);
 
                     runOnUiThread(() -> {

@@ -30,16 +30,27 @@ public class User {
     @ColumnInfo(name="photo")
     private String photo;
 
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    private String adresse;
+
     public User() {
     }
 
     @Ignore
-    public User(String userName, int phone, String email, String password, String photo) {
+    public User(String userName, int phone, String email, String password, String photo, String adresse) {
         this.userName = userName;
         this.phone = phone;
         this.email = email;
         this.password = password;
         this.photo = photo;
+        this.adresse = adresse;
     }
 
 
@@ -100,6 +111,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", photo='" + photo + '\'' +
+                ", adresse='" + adresse + '\'' +
                 '}';
     }
 }
