@@ -40,7 +40,7 @@ public class PostFragment extends Fragment {
         found.setOnClickListener(view1 -> {
             editor.putString("typePost", "found");
             editor.commit();
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame,new FoundFragment()).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame,new LostFragment()).commit();
 
         });
         return view;
