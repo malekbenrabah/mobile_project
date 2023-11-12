@@ -55,8 +55,11 @@ public class LostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         View view = inflater.inflate(R.layout.fragment_lost, container, false);
 
+        database = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
         sp = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
 
         spinnerRegion = view.findViewById(R.id.region_spinner);
@@ -143,9 +146,9 @@ public class LostFragment extends Fragment {
                         for (Post p : posts) {
                             System.out.println("post info : " + p);
                         }
-
+                    getActivity().runOnUiThread(() -> {
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame, new HomeFragment()).commit();
-
+                    });
                 }
 
             });
