@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.mobile_project.entity.Post;
 import com.example.mobile_project.entity.User;
@@ -23,7 +24,10 @@ public interface PostDao {
     List<Post> getUserAllPosts(int userId);
 
     @Delete
-    Boolean deletePost(Post post);
+    void deletePost(Post post);
+
+    @Update
+    void updatePost(Post post);
 
 
 }

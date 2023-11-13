@@ -180,6 +180,11 @@ public class PostActivity extends AppCompatActivity {
                 intent.putExtra("fragmentToLoad", "HomeFragment");
                 startActivity(intent);
                 return true;
+            } else if (item.getItemId() == R.id.posts) {
+                Intent intent = new Intent(this, MainActivity2.class);
+                intent.putExtra("fragmentToLoad", "AllUserPostsFragment");
+                startActivity(intent);
+                return true;
             }
             return false;
         });

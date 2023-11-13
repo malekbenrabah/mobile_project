@@ -15,7 +15,7 @@ import com.example.mobile_project.entity.Commentaire;
 import com.example.mobile_project.entity.Post;
 import com.example.mobile_project.entity.User;
 
-@Database(entities = {User.class, Post.class, Commentaire.class}, version = 6)
+@Database(entities = {User.class, Post.class, Commentaire.class}, version = 7)
 @AutoMigration(from = 1, to = 2)
 public abstract class AppDatabase extends RoomDatabase {
 

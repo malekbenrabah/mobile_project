@@ -16,6 +16,7 @@ import com.example.mobile_project.database.AppDatabase;
 import com.example.mobile_project.entity.Post;
 import com.example.mobile_project.entity.User;
 import com.example.mobile_project.entity.UserWithPosts;
+import com.example.mobile_project.listeners.OnDeletePostListener;
 
 import org.w3c.dom.Text;
 
@@ -28,8 +29,11 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
     AppDatabase database;
 
 
-    public PostsUserAdapater(List<Post> postList) {
+    private OnDeletePostListener deletePostListener;
+
+    public PostsUserAdapater(List<Post> postList, OnDeletePostListener deletePostListener) {
         this.postList = postList;
+        this.deletePostListener = deletePostListener;
     }
 
     public void setPostList(List<Post> postList) {
@@ -38,7 +42,7 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
     }
 
 
-    static class PostViewHolder extends RecyclerView.ViewHolder {
+    public class PostViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TextView descriptionTextView;
         TextView postTypeTextView;
@@ -47,6 +51,8 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
         TextView locationTextView;
 
         ImageView postImageView;
+
+        ImageView deleteButton;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +63,16 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
             postImageView = itemView.findViewById(R.id.post_image);
             locationTextView = itemView.findViewById(R.id.post_location);
 
+            //delete
+            deleteButton= itemView.findViewById(R.id.post_trash);
+            deleteButton.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Post post = postList.get(position);
+                    // Call a method to delete the post
+                    deletePostListener.onDeletePost(post);
+                }
+            });
 
         }
     }

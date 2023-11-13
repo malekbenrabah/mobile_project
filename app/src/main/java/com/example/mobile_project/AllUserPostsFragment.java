@@ -26,8 +26,9 @@ import com.example.mobile_project.entity.UserWithPosts;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.mobile_project.listeners.OnDeletePostListener;
 
-public class AllUserPostsFragment extends Fragment {
+public class AllUserPostsFragment extends Fragment  implements OnDeletePostListener {
 
 
     AppDatabase database;
@@ -54,7 +55,7 @@ public class AllUserPostsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        postAdapter = new PostsUserAdapater(new ArrayList<>());
+        postAdapter = new PostsUserAdapater(new ArrayList<>(),this);
 
         recyclerView.setAdapter(postAdapter);
 
@@ -116,5 +117,21 @@ public class AllUserPostsFragment extends Fragment {
             }
 
         }.execute();
+    }
+
+    @Override
+    public void onDeletePost(Post post) {
+        ioThread(() -> {
+            database.postDao().deletePost(post);
+            sp = getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+            int userId = sp.getInt("userId", -1);
+
+            List<Post> updatedPosts = database.postDao().getUserAllPosts(userId);
+
+            requireActivity().runOnUiThread(() -> {
+                postAdapter.setPostList(updatedPosts);
+            });
+
+        });
     }
 }
