@@ -7,22 +7,24 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mobile_project.database.AppDatabase;
 import com.example.mobile_project.entity.User;
+import com.example.mobile_project.session.SessionManager;
 
 public class MainActivity3 extends AppCompatActivity {
 
+    public static String spName = "sharedPref";
+    public SharedPreferences sp;
     AppDatabase database;
     Button login;
     EditText loginEt, pwdEt;
     TextView register;
     CheckBox rememberMe;
-
-    public SharedPreferences sp;
-    public static String spName = "sharedPref";
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,26 +33,42 @@ public class MainActivity3 extends AppCompatActivity {
 
         database = AppDatabase.getAppDatabase(getApplicationContext());
 
+        sessionManager = new SessionManager(this);
+
         sp = getSharedPreferences(spName, MODE_PRIVATE);
+
+        if (sessionManager.isLoggedIn()) {
+            Intent intent = new Intent(this, MainActivity2.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
 
         login = findViewById(R.id.btnLogin);
         loginEt = findViewById(R.id.etEmail);
         pwdEt = findViewById(R.id.etPassword);
         rememberMe = findViewById(R.id.rememberMe);
 
-        loginEt.setText(sp.getString("userName", ""));
-        pwdEt.setText(sp.getString("pwd", ""));
+        // Use shared preferences to store username and password if checked
+        if (rememberMe.isChecked()) {
+            loginEt.setText(sp.getString("userName", ""));
+            pwdEt.setText(sp.getString("pwd", ""));
+        }
 
         login.setOnClickListener(view -> {
+            String email = loginEt.getText().toString();
+            String password = pwdEt.getText().toString();
+
             ioThread(() -> {
-                User user = database.userDao().authenticate(loginEt.getText().toString(), pwdEt.getText().toString());
+                User user = database.userDao().authenticate(email, password);
                 if (user != null) {
-                    System.out.println(user);
+                    sessionManager.createSession(user.getId(), user.getUserName(), email, String.valueOf(user.getPhone()), user.getPassword(), user.getPhoto(), user.isAdmin());
                     runOnUiThread(() -> {
                         if (rememberMe.isChecked()) {
+                            // Store the username and password in shared preferences
                             SharedPreferences.Editor editor = sp.edit();
-                            editor.putString("userName", loginEt.getText().toString());
-                            editor.putString("pwd", pwdEt.getText().toString());
+                            editor.putString("userName", user.getUserName());
+                            editor.putString("pwd", password);
                             editor.apply();
                         }
 
@@ -60,8 +78,8 @@ public class MainActivity3 extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setMessage("Nom d'utilisateur ou mot de passe incorrect.")
-                                .setTitle("Informations d'identification invalides")
+                        builder.setMessage("Email or password is incorrect.")
+                                .setTitle("Invalid Credentials")
                                 .setPositiveButton("OK", (dialog, which) -> {
                                 });
 

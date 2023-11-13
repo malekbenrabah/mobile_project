@@ -4,10 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.Relation;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(tableName = "user")
 public class User {
@@ -27,67 +23,61 @@ public class User {
     @ColumnInfo(name = "password")
     private String password;
 
-    @ColumnInfo(name="photo")
+    @ColumnInfo(name = "photo")
     private String photo;
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    private String adresse;
+    @ColumnInfo(name = "role")
+    private Role role;  // Added role field
 
     public User() {
+        // Default role is CLIENT
+        this.role = Role.CLIENT;
     }
 
     @Ignore
-    public User(String userName, int phone, String email, String password, String photo, String adresse) {
+    public User(String userName, int phone, String email, String password, String photo, Role role) {
         this.userName = userName;
         this.phone = phone;
         this.email = email;
         this.password = password;
         this.photo = photo;
-        this.adresse = adresse;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
+        this.role = role;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getUserName() {
         return userName;
-    }
-
-    public int getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    public int getPhone() {
+        return phone;
+    }
+
     public void setPhone(int phone) {
         this.phone = phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
@@ -102,6 +92,18 @@ public class User {
         this.photo = photo;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public boolean isAdmin() {
+        return role == Role.ADMIN;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -111,7 +113,13 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", photo='" + photo + '\'' +
-                ", adresse='" + adresse + '\'' +
+                ", role=" + role +
                 '}';
+    }
+
+    // Enum for user roles
+    public enum Role {
+        ADMIN,
+        CLIENT
     }
 }

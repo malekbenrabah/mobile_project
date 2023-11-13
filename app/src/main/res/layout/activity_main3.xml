@@ -15,8 +15,6 @@
             android:layout_height="wrap_content"
             tools:context="com.instamobile.firebaseStarterKit.ui.fragment.login.LoginFragment">
 
-
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
@@ -25,9 +23,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="Lost and found"
+                android:text="Lost and Found"
                 android:textColor="@color/colorPrimary"
-                android:textSize="28sp"
+                android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,10 +36,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/rounded_border"
-                android:hint="email"
+                android:hint="Email"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:textSize="20sp"
@@ -54,10 +52,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/rounded_border"
-                android:hint="password"
+                android:hint="Password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:textSize="20sp"
@@ -72,8 +70,8 @@
                 android:layout_marginTop="16dp"
                 android:maxLines="3"
                 android:textAlignment="viewStart"
-                android:textAllCaps="true"
                 android:textColor="@android:color/holo_red_dark"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/etPassword"
                 app:layout_constraintStart_toStartOf="@+id/etPassword"
@@ -84,12 +82,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/ic_white_button"
                 android:text="Login"
                 android:textAllCaps="false"
-                android:textColor="@color/mainBgColor"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +100,7 @@
                 android:layout_marginStart="36dp"
                 android:text="Remember me"
                 android:textColor="@color/subTextColor"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/tvOr"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +114,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
-                android:text="create an account"
+                android:text="Create an Account"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -123,7 +122,6 @@
                 app:layout_constraintHorizontal_bias="0.554"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rememberMe" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

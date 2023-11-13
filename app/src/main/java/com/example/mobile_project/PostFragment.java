@@ -1,13 +1,12 @@
 package com.example.mobile_project;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
 
 
 public class PostFragment extends Fragment {
@@ -20,15 +19,15 @@ public class PostFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_post, container, false);
-        lost=view.findViewById(R.id.lost);
+        lost = view.findViewById(R.id.lost);
         lost.setOnClickListener(view1 -> {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame,new LostFragment()).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame, new LostFragment()).commit();
 
         });
 
-        found=view.findViewById(R.id.found);
+        found = view.findViewById(R.id.found);
         found.setOnClickListener(view1 -> {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame,new FoundFragment()).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame, new FoundFragment()).commit();
 
         });
         return view;

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.mobile_project.entity.User;
 
@@ -30,4 +31,10 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE username = :username")
     LiveData<User> findByUsername(String username);
+
+    @Update
+    void updateUser(User user);
+
+    @Query("UPDATE user SET photo = :photo WHERE id = :userId")
+    void updateUserPhoto(int userId, String photo);
 }

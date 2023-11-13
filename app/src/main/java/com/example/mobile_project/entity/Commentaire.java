@@ -4,12 +4,10 @@ import android.util.Log;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Locale;
 
@@ -39,7 +37,7 @@ public class Commentaire {
         this.userId = userId;
     }
 
-    public String getCurrentDate(){
+    public String getCurrentDate() {
 
         Date currentDate = new Date();
 
@@ -67,7 +65,6 @@ public class Commentaire {
     public void setText(String text) {
         this.text = text;
     }
-
 
 
     public String getCreated_at() {

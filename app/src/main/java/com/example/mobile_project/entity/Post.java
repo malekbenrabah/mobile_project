@@ -4,15 +4,11 @@ import android.util.Log;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.Relation;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 @Entity(tableName = "post")
@@ -23,24 +19,10 @@ public class Post {
     private String description;
 
     private String created_at;
-
-    public PostType getType() {
-        return type;
-    }
-
-    public void setType(PostType type) {
-        this.type = type;
-    }
-
     private PostType type;
-
-
     private String photo;
-
     private String ville;
-
     private String region;
-
     @ColumnInfo(name = "userId")
     private int userId;
 
@@ -59,18 +41,26 @@ public class Post {
         this.type = type;
     }
 
-    public String getCurrentDate(){
+    public PostType getType() {
+        return type;
+    }
 
-       Date currentDate = new Date();
+    public void setType(PostType type) {
+        this.type = type;
+    }
 
-       SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+    public String getCurrentDate() {
 
-       String formattedDate = sdf.format(currentDate);
+        Date currentDate = new Date();
 
-       Log.d("FormattedDate", formattedDate);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
 
-       return formattedDate;
-   }
+        String formattedDate = sdf.format(currentDate);
+
+        Log.d("FormattedDate", formattedDate);
+
+        return formattedDate;
+    }
 
     public String getVille() {
         return ville;
@@ -148,7 +138,7 @@ public class Post {
                 ", photo='" + photo + '\'' +
                 ", ville='" + ville + '\'' +
                 ", region='" + region + '\'' +
-                "type='"+ type + '\''+
+                "type='" + type + '\'' +
                 '}';
     }
 }
