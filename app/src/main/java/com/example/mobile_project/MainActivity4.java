@@ -14,8 +14,6 @@ import android.widget.TextView;
 import com.example.mobile_project.database.AppDatabase;
 import com.example.mobile_project.entity.User;
 
-import java.util.List;
-
 public class MainActivity4 extends AppCompatActivity {
 
     AppDatabase database;
@@ -36,8 +34,8 @@ public class MainActivity4 extends AppCompatActivity {
         signup = findViewById(R.id.btnSignUp);
         username = findViewById(R.id.etFullName);
         phone = findViewById(R.id.etPhone);
-        email = findViewById(R.id.etEmail);
-        password = findViewById(R.id.etPassword);
+        email = findViewById(R.id.etTitre);
+        password = findViewById(R.id.etDescription);
 
         signup.setOnClickListener(view -> {
             ioThread(() -> {

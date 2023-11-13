@@ -1,6 +1,7 @@
 package com.example.mobile_project;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -11,12 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 public class PostFragment extends Fragment {
 
     Button lost, found;
 
     private SharedPreferences sp;
+
+
 
 
     @Override
@@ -32,7 +37,9 @@ public class PostFragment extends Fragment {
         lost.setOnClickListener(view1 -> {
             editor.putString("typePost", "lost");
             editor.commit();
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame,new LostFragment()).commit();
+
+            Intent intent = new Intent(requireActivity(),PostActivity.class);
+            startActivity(intent);
 
         });
 
@@ -40,8 +47,9 @@ public class PostFragment extends Fragment {
         found.setOnClickListener(view1 -> {
             editor.putString("typePost", "found");
             editor.commit();
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame,new LostFragment()).commit();
 
+            Intent intent = new Intent(requireActivity(),PostActivity.class);
+            startActivity(intent);
         });
         return view;
     }

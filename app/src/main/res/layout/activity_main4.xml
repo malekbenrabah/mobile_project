@@ -116,7 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/etPhone" />
 
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/etTitre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -140,13 +140,13 @@
                 android:textAllCaps="true"
                 android:textColor="@android:color/holo_red_dark"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/etEmail"
+                app:layout_constraintEnd_toEndOf="@+id/etTitre"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/etEmail"
-                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+                app:layout_constraintStart_toStartOf="@+id/etTitre"
+                app:layout_constraintTop_toBottomOf="@+id/etTitre" />
 
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/etDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -159,7 +159,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etEmail" />
+                app:layout_constraintTop_toBottomOf="@id/etTitre" />
 
             <TextView
                 android:id="@+id/passwordError"
@@ -171,10 +171,10 @@
                 android:textAllCaps="true"
                 android:textColor="@android:color/holo_red_dark"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/etPassword"
+                app:layout_constraintEnd_toEndOf="@+id/etDescription"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/etPassword"
-                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+                app:layout_constraintStart_toStartOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
             <Button
                 android:id="@+id/btnSignUp"
@@ -193,7 +193,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etPassword" />
+                app:layout_constraintTop_toBottomOf="@id/etDescription" />
 
             <TextView
                 android:id="@+id/signin"

@@ -33,9 +33,9 @@ public class MainActivity3 extends AppCompatActivity {
 
         sp = getSharedPreferences(spName, MODE_PRIVATE);
 
-        login = findViewById(R.id.btnLogin);
-        loginEt = findViewById(R.id.etEmail);
-        pwdEt = findViewById(R.id.etPassword);
+        login = findViewById(R.id.btnAdd);
+        loginEt = findViewById(R.id.etTitre);
+        pwdEt = findViewById(R.id.etDescription);
         rememberMe = findViewById(R.id.rememberMe);
 
         loginEt.setText(sp.getString("userName", ""));

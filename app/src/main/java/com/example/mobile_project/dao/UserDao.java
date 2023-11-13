@@ -30,4 +30,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE username = :username")
     LiveData<User> findByUsername(String username);
+
+    @Query("SELECT * FROM user WHERE id=:id")
+    User getUserById(int id);
 }

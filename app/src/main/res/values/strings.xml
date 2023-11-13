@@ -61,4 +61,5 @@
         <item>Sousse City</item>
         <item>Monastir</item>
     </string-array>
+    <string name="title_activity_add_post">AddPostActivity</string>
 </resources>
