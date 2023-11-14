@@ -1,62 +1,103 @@
 package com.example.mobile_project;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Menu;
+
+import androidx.core.view.GravityCompat;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import com.example.mobile_project.databinding.ActivityAdminBinding;
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
-private ActivityAdminBinding binding;
+    private ActivityAdminBinding binding;
+
+    private DrawerLayout drawer; // Add this member variable
+    private ActionBarDrawerToggle toggle; // Add this member variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-     binding = ActivityAdminBinding.inflate(getLayoutInflater());
-     setContentView(binding.getRoot());
+        binding = ActivityAdminBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarAdmin.toolbar);
         binding.appBarAdmin.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        DrawerLayout drawer = binding.drawerLayout;
+                                                       @Override
+                                                       public void onClick(View view) {
+                                                           Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                                                   .setAction("Action", null).show();
+                                                       }
+                                                   });
+
+                drawer = binding.drawerLayout; // Initialize the drawer variable
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_user_home, R.id.nav_users, R.id.nav_posts)
                 .setOpenableLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_admin);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // Initialize the ActionBarDrawerToggle
+        toggle = new ActionBarDrawerToggle(this, drawer, binding.appBarAdmin.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.admin, menu);
         return true;
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_user_home) {
+            // User Home item is selected, start MainActivity2
+            Intent intent = new Intent(this, MainActivity2.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.nav_users) {
+            // User List item is selected, navigate to the User List fragment
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_admin);
+            navController.navigate(R.id.userListFragment);
+            drawer.closeDrawer(GravityCompat.START); // Close the drawer after navigation
+            return true;
+        }
+
+        // Handle other menu items here if needed
+        return false;
+    }
+
+    // Add this method to support back navigation
+    @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_admin);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        NavController navController = Navigation.findNavController(this, com.example.mobile_project.R.id.nav_host_fragment_content_admin);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 }

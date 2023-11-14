@@ -2,6 +2,7 @@ package com.example.mobile_project.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -27,7 +28,7 @@ public interface UserDao {
     User authenticate(String userName, String password);
 
     @Query("SELECT * FROM user")
-    LiveData<List<User>> findAllUsers();
+    List<User> findAllUsers();
 
     @Query("SELECT * FROM user WHERE username = :username")
     LiveData<User> findByUsername(String username);
@@ -35,6 +36,6 @@ public interface UserDao {
     @Update
     void updateUser(User user);
 
-    @Query("UPDATE user SET photo = :photo WHERE id = :userId")
-    void updateUserPhoto(int userId, String photo);
+    @Delete
+    void deleteUser(User user);
 }

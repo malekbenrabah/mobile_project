@@ -1,9 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="start"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@drawable/receiver_background">
 
     <TextView
         android:id="@+id/messageSender"
@@ -16,7 +18,8 @@
         android:id="@+id/messageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is a chat message from the receiver." />
+        android:text="This is a chat message from the receiver."
+        android:textColor="@android:color/darker_gray" />
 
     <TextView
         android:id="@+id/messageTimestamp"

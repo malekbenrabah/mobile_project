@@ -17,6 +17,9 @@ public class MainActivity2 extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     SessionManager sessionManager;
 
+    private Fragment currentFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,25 +44,22 @@ public class MainActivity2 extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
                 loadFragment(new HomeFragment());
-                return true;
             } else if (item.getItemId() == R.id.person) {
                 loadFragment(new ProfileFragment());
-                return true;
             } else if (item.getItemId() == R.id.dashboard) {
                 if (sessionManager.getIsAdmin()) {
                     Intent adminIntent = new Intent(this, AdminActivity.class);
                     startActivity(adminIntent);
-                    return true;
                 }
-            }
-            else if (item.getItemId() == R.id.logout) {
+            } else if (item.getItemId() == R.id.logout) {
                 sessionManager.logout();
                 Intent intent = new Intent(this, MainActivity3.class);
                 startActivity(intent);
                 finish();
-                return true;
+            } else if (item.getItemId() == R.id.chat) {
+                loadFragment(new ChatFragment());
             }
-            return false;
+            return true;
         });
 
         floatingActionButton = findViewById(R.id.fab);
@@ -74,5 +74,24 @@ public class MainActivity2 extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, fragment);
         transaction.commit();
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        currentFragment = fragment;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame, fragment)
+                .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (currentFragment instanceof ChatFragment) {
+            // Handle back navigation from ChatFragment to HomeFragment
+            replaceFragment(new HomeFragment());
+            bottomNavigationView.setSelectedItemId(R.id.home);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

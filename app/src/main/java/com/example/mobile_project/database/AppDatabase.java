@@ -7,15 +7,22 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.mobile_project.dao.ChatDao;
+import com.example.mobile_project.dao.ChatMessageDao;
 import com.example.mobile_project.dao.UserDao;
+import com.example.mobile_project.entity.Chat;
+import com.example.mobile_project.entity.ChatMessage;
 import com.example.mobile_project.entity.Commentaire;
 import com.example.mobile_project.entity.Post;
 import com.example.mobile_project.entity.User;
 
-@Database(entities = {User.class, Post.class, Commentaire.class}, version = 4)
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+@Database(entities = {User.class, Post.class, Commentaire.class, Chat.class, ChatMessage.class}, version = 6)
 @AutoMigration(from = 1, to = 2)
 public abstract class AppDatabase extends RoomDatabase {
-
+    public static final Executor databaseWriteExecutor = Executors.newSingleThreadExecutor();
     private static final java.util.concurrent.Executor IO_EXECUTOR = java.util.concurrent.Executors.newSingleThreadExecutor();
     private static AppDatabase instance;
 
@@ -34,6 +41,8 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract UserDao userDao();
+    public abstract ChatDao chatDao();
+    public abstract ChatMessageDao chatMessageDao();
 
     public void insertAdminUser() {
         ioThread(() -> {
