@@ -14,6 +14,13 @@ import java.util.List;
 
 @Dao
 public interface PostDao {
+    @Query("UPDATE post SET likes = :likes + 1 WHERE id = :postId")
+    void updateLikes(int postId, int likes);
+
+    @Query("UPDATE post SET dislikes = :dislikes + 1 WHERE id = :postId")
+    void updateDislikes(int postId, int dislikes);
+    @Query("SELECT * FROM post ORDER BY likes DESC")
+    LiveData<List<Post>> getMostLikedPosts();
 
     @Insert
     void insertPost(Post post);
@@ -33,12 +40,9 @@ public interface PostDao {
     @Query("SELECT * FROM post where id=:id")
     Post getPostById(int id);
 
-    @Query("UPDATE post SET likes = :likes + 1 WHERE id = :postId")
-    void updateLikes(int postId, int likes);
+    @Query("SELECT * FROM post where title=:titre")
+    List<Post>searchPostsByTitle(String titre);
 
-    @Query("UPDATE post SET dislikes = :dislikes + 1 WHERE id = :postId")
-    void updateDislikes(int postId, int dislikes);
-    @Query("SELECT * FROM post ORDER BY likes DESC")
-    LiveData<List<Post>> getMostLikedPosts();
-
+    @Query("SELECT * FROM post WHERE title LIKE '%' || :searchText || '%' OR ville LIKE '%' || :searchText || '%' OR region LIKE '%' || :searchText || '%'")
+    List<Post> search(String searchText);
 }
