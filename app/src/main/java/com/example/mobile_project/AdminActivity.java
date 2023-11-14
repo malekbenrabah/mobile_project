@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.core.view.GravityCompat;
+
+import com.example.mobile_project.session.SessionManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import com.example.mobile_project.databinding.ActivityAdminBinding;
+
+import java.util.HashMap;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -57,6 +61,11 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         toggle = new ActionBarDrawerToggle(this, drawer, binding.appBarAdmin.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        /*SessionManager sessionManager = new SessionManager(getApplicationContext);
+        HashMap<String, String> user = sessionManager.getUserDetails();
+        String username = user.get(SessionManager.KEY_USERNAME);
+        String email = user.get(SessionManager.KEY_EMAIL);*/
     }
 
     @Override
