@@ -12,9 +12,9 @@
         android:icon="@drawable/baseline_admin_panel_settings_24"
         android:title="Dashboard" />
     <item
-        android:id="@+id/chat"
-        android:icon="@drawable/ic_baseline_chat_24"
-        android:title="Chat" />
+        android:id="@+id/posts"
+        android:icon="@drawable/my_posts_icon"
+        android:title="My posts"/>
     <item
         android:id="@+id/logout"
         android:icon="@drawable/baseline_logout_24"
