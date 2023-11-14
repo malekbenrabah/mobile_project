@@ -16,6 +16,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.mobile_project.adapters.PostAdapter;
 import com.example.mobile_project.adapters.PostsUserAdapater;
@@ -43,6 +46,10 @@ public class AllUserPostsFragment extends Fragment  implements OnDeletePostListe
 
     private SharedPreferences sp;
 
+    EditText searchEditText;
+    ImageView search;
+    Button searchButton;
+
 
 
 
@@ -53,6 +60,21 @@ public class AllUserPostsFragment extends Fragment  implements OnDeletePostListe
         View view = inflater.inflate(R.layout.fragment_all_user_posts, container, false);
 
         database = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
+
+        search = view.findViewById(R.id.post_trash);
+        searchEditText = view.findViewById(R.id.searchEt);
+        searchButton =view.findViewById(R.id.searchButton);
+        search.setOnClickListener(v -> {
+            searchEditText.setVisibility(View.VISIBLE);
+            searchButton.setVisibility(View.VISIBLE);
+
+            searchButton.setOnClickListener(view1 -> {
+                String searchText = searchEditText.getText().toString();
+                filterPosts(searchText);
+            });
+
+        });
+
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -151,5 +173,16 @@ public class AllUserPostsFragment extends Fragment  implements OnDeletePostListe
                 .addToBackStack(null)
                 .commit();
 
+    }
+
+    private void filterPosts(String searchText) {
+        ioThread(() -> {
+            //List<Post> filteredPosts = database.postDao().searchPostsByTitle(searchText);
+            List<Post> filteredPosts = database.postDao().search(searchText);
+
+            requireActivity().runOnUiThread(() -> {
+                postAdapter.setPostList(filteredPosts);
+            });
+        });
     }
 }

@@ -32,5 +32,11 @@ public interface PostDao {
     @Query("SELECT * FROM post where id=:id")
     Post getPostById(int id);
 
+    @Query("SELECT * FROM post where title=:titre")
+    List<Post>searchPostsByTitle(String titre);
+
+    @Query("SELECT * FROM post WHERE title LIKE '%' || :searchText || '%' OR ville LIKE '%' || :searchText || '%' OR region LIKE '%' || :searchText || '%'")
+    List<Post> search(String searchText);
+
 
 }
