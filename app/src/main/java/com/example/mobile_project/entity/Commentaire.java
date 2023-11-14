@@ -99,7 +99,9 @@ public class Commentaire {
         return "Commentaire{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", created_at=" + created_at +
+                ", created_at='" + created_at + '\'' +
+                ", postId=" + postId +
+                ", userId=" + userId +
                 '}';
     }
 }

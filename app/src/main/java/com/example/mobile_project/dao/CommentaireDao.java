@@ -1,5 +1,6 @@
 package com.example.mobile_project.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -17,4 +18,6 @@ public interface CommentaireDao {
 
     @Query("SELECT * FROM commentaire")
     List<Commentaire> getAll();
+    @Query("SELECT * FROM Commentaire WHERE postId = :postId")
+    LiveData<List<Commentaire>> getCommentsForPost(int postId);
 }
