@@ -20,14 +20,21 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.mobile_project.adapters.PostsUserAdapater;
 import com.example.mobile_project.database.AppDatabase;
 import com.example.mobile_project.entity.Post;
+import com.example.mobile_project.listeners.OnDeletePostListener;
+import com.example.mobile_project.listeners.UpdatePostListener;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.example.mobile_project.listeners.OnDeletePostListener;
+import com.example.mobile_project.listeners.UpdatePostListener;
 
-public class UpdatePostFragment extends Fragment {
+
+public class UpdatePostFragment extends Fragment implements OnDeletePostListener, UpdatePostListener {
 
 
     AppDatabase database;
@@ -42,6 +49,9 @@ public class UpdatePostFragment extends Fragment {
 
     Button updatePost;
 
+    private PostsUserAdapater postAdapter;
+
+    String photoPath;
 
 
     @Override
@@ -51,8 +61,11 @@ public class UpdatePostFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_update_post, container, false);
         database = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
 
+        postAdapter = new PostsUserAdapater(new ArrayList<>(),this,this);
+
         sp = getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         int postId = sp.getInt("postId", -1);
+
 
         titre = view.findViewById(R.id.etTitreUpdate);
         description = view.findViewById(R.id.etDescriptionUpdate);
@@ -82,9 +95,12 @@ public class UpdatePostFragment extends Fragment {
             }
         });
 
+
+
         // get post by id
         ioThread(() -> {
             Post post = database.postDao().getPostById(postId);
+            photoPath = post.getPhoto();
             if (post != null) {
                 //update fragement with post
                 requireActivity().runOnUiThread(() -> {
@@ -114,6 +130,7 @@ public class UpdatePostFragment extends Fragment {
             String updatedRegion = spinnerRegion.getSelectedItem().toString();
             String updatedVille = spinnerVille.getSelectedItem().toString();
             String updatedPostType = spinnerPostType.getSelectedItem().toString();
+            int userId = sp.getInt("userId", -1);
 
             Post updatedPost = new Post();
             updatedPost.setId(postId);
@@ -122,11 +139,24 @@ public class UpdatePostFragment extends Fragment {
             updatedPost.setRegion(updatedRegion);
             updatedPost.setVille(updatedVille);
             updatedPost.setPost_type(updatedPostType);
+            updatedPost.setUserId(userId);
+            updatedPost.setPhoto(photoPath);
+
 
             ioThread(() -> {
                 database.postDao().updatePost(updatedPost);
                 requireActivity().runOnUiThread(() -> {
                     navigateToAllUserPostsFragment();
+                });
+
+
+                sp = getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+
+                List<Post> updatedPosts = database.postDao().getUserAllPosts(userId);
+
+
+                requireActivity().runOnUiThread(() -> {
+                    postAdapter.setPostList(updatedPosts);
                 });
 
 
@@ -177,5 +207,15 @@ public class UpdatePostFragment extends Fragment {
                 .beginTransaction()
                 .replace(R.id.frame, new AllUserPostsFragment())
                 .commit();
+    }
+
+    @Override
+    public void onDeletePost(Post post) {
+
+    }
+
+    @Override
+    public void onUpdatePost(Post post) {
+
     }
 }

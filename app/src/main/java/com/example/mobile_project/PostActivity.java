@@ -193,6 +193,37 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
+    private void deleteExternalFiles() {
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+
+        // Check if the directory exists
+        if (directory.exists()) {
+            // List all files in the directory
+            File[] files = directory.listFiles();
+
+            // Delete each file
+            if (files != null) {
+                for (File file : files) {
+                    file.delete();
+                }
+            }
+
+            // Delete the directory itself
+            directory.delete();
+        }
+    }
+
+    /*
+    @Override
+    protected void onDestroy() {
+        // Call the deleteExternalFiles() method when the activity is destroyed
+        deleteExternalFiles();
+        super.onDestroy();
+    }
+
+     */
+
     public String getCurrentDate() {
 
         Date currentDate = new Date();
