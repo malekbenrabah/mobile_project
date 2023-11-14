@@ -61,5 +61,13 @@
         <item>Sousse City</item>
         <item>Monastir</item>
     </string-array>
+
+    <string-array name="empty_array" />
+
+    <string-array name="type_post_array">
+        <item>Lost</item>
+        <item>Found</item>
+    </string-array>
+
     <string name="title_activity_add_post">AddPostActivity</string>
 </resources>

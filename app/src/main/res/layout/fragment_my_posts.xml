@@ -99,11 +99,17 @@
 
 
         <ImageView
+            android:id="@+id/post_update"
+            android:layout_width="16sp"
+            android:layout_height="16sp"
+            android:layout_weight="1"
+            android:src="@drawable/edit" />
+
+        <ImageView
             android:id="@+id/post_trash"
             android:layout_width="16sp"
             android:layout_height="16sp"
             android:layout_weight="1"
-            android:gravity="end"
             android:src="@drawable/trash" />
 
 

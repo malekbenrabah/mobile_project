@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,8 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.mobile_project.listeners.OnDeletePostListener;
+import com.example.mobile_project.listeners.UpdatePostListener;
 
-public class AllUserPostsFragment extends Fragment  implements OnDeletePostListener {
+public class AllUserPostsFragment extends Fragment  implements OnDeletePostListener, UpdatePostListener {
 
 
     AppDatabase database;
@@ -55,7 +57,7 @@ public class AllUserPostsFragment extends Fragment  implements OnDeletePostListe
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        postAdapter = new PostsUserAdapater(new ArrayList<>(),this);
+        postAdapter = new PostsUserAdapater(new ArrayList<>(),this,this);
 
         recyclerView.setAdapter(postAdapter);
 
@@ -79,8 +81,6 @@ public class AllUserPostsFragment extends Fragment  implements OnDeletePostListe
         });
 
          */
-
-
 
         loadPostsFromRoom();
         return view;
@@ -133,5 +133,23 @@ public class AllUserPostsFragment extends Fragment  implements OnDeletePostListe
             });
 
         });
+    }
+
+    @Override
+    public void onUpdatePost(Post post) {
+
+        sp = getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("postId", post.getId());
+        editor.apply();
+
+
+        UpdatePostFragment updatePostFragment = new UpdatePostFragment();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.frame, updatePostFragment)
+                .addToBackStack(null)
+                .commit();
+
     }
 }

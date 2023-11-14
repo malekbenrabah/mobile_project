@@ -17,6 +17,7 @@ import com.example.mobile_project.entity.Post;
 import com.example.mobile_project.entity.User;
 import com.example.mobile_project.entity.UserWithPosts;
 import com.example.mobile_project.listeners.OnDeletePostListener;
+import com.example.mobile_project.listeners.UpdatePostListener;
 
 import org.w3c.dom.Text;
 
@@ -31,9 +32,13 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
 
     private OnDeletePostListener deletePostListener;
 
-    public PostsUserAdapater(List<Post> postList, OnDeletePostListener deletePostListener) {
+    private UpdatePostListener updatePostListener;
+
+    public PostsUserAdapater(List<Post> postList, OnDeletePostListener deletePostListener , UpdatePostListener updatePostListener) {
         this.postList = postList;
         this.deletePostListener = deletePostListener;
+        this.updatePostListener = updatePostListener;
+
     }
 
     public void setPostList(List<Post> postList) {
@@ -54,6 +59,8 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
 
         ImageView deleteButton;
 
+        ImageView updateButton;
+
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.post_title);
@@ -69,8 +76,19 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     Post post = postList.get(position);
-                    // Call a method to delete the post
+                    // delete the post
                     deletePostListener.onDeletePost(post);
+                }
+            });
+
+            // update
+            updateButton = itemView.findViewById(R.id.post_update);
+            updateButton.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Post post = postList.get(position);
+                    //update the post
+                    updatePostListener.onUpdatePost(post);
                 }
             });
 

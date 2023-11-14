@@ -29,5 +29,8 @@ public interface PostDao {
     @Update
     void updatePost(Post post);
 
+    @Query("SELECT * FROM post where id=:id")
+    Post getPostById(int id);
+
 
 }
