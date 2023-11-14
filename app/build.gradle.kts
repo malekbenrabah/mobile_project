@@ -52,9 +52,13 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation ("androidx.activity:activity-ktx:1.3.0")
+    implementation ("androidx.fragment:fragment-ktx:1.3.0")
 
     implementation("androidx.room:room-runtime:2.6.0")
     annotationProcessor("androidx.room:room-compiler:2.6.0")
 
-    implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+
 }

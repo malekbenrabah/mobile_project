@@ -1,16 +1,18 @@
 package com.example.mobile_project;
 
 import android.os.Bundle;
-import android.view.View;
+
+import com.example.mobile_project.databinding.ActivityTestBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.example.mobile_project.databinding.ActivityTestBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 public class testActivity extends AppCompatActivity {
 
@@ -30,11 +32,11 @@ public class testActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        binding.faba.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
+                        .setAnchorView(R.id.faba)
                         .setAction("Action", null).show();
             }
         });

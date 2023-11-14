@@ -1,5 +1,8 @@
 package com.example.mobile_project;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +11,16 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 public class PostFragment extends Fragment {
 
     Button lost, found;
+
+    private SharedPreferences sp;
+
+
 
 
     @Override
@@ -19,16 +28,27 @@ public class PostFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_post, container, false);
-        lost = view.findViewById(R.id.lost);
+        sp = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        lost=view.findViewById(R.id.lost);
         lost.setOnClickListener(view1 -> {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame, new LostFragment()).commit();
+            editor.putString("typePost", "lost");
+            editor.commit();
+
+            Intent intent = new Intent(requireActivity(),PostActivity.class);
+            startActivity(intent);
 
         });
 
         found = view.findViewById(R.id.found);
         found.setOnClickListener(view1 -> {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame, new FoundFragment()).commit();
+            editor.putString("typePost", "found");
+            editor.commit();
 
+            Intent intent = new Intent(requireActivity(),PostActivity.class);
+            startActivity(intent);
         });
         return view;
     }

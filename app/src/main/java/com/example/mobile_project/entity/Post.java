@@ -19,6 +19,13 @@ public class Post {
     private String description;
 
     private String created_at;
+
+    private String post_type;
+    
+    public void setType(PostType type) {
+        this.type = type;
+    }
+
     private PostType type;
     private String photo;
     private String ville;
@@ -43,10 +50,6 @@ public class Post {
 
     public PostType getType() {
         return type;
-    }
-
-    public void setType(PostType type) {
-        this.type = type;
     }
 
     public String getCurrentDate() {
@@ -127,18 +130,28 @@ public class Post {
         this.created_at = created_at;
     }
 
+    public String getPost_type() {
+        return post_type;
+    }
+
+    public void setPost_type(String post_type) {
+        this.post_type = post_type;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", created_at=" + created_at +
-                ", userId=" + userId +
+                ", created_at='" + created_at + '\'' +
+                ", post_type='" + post_type + '\'' +
+                ", type=" + type +
                 ", photo='" + photo + '\'' +
                 ", ville='" + ville + '\'' +
                 ", region='" + region + '\'' +
                 "type='" + type + '\'' +
+                ", userId=" + userId +
                 '}';
     }
 }

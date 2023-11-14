@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/etTitre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toBottomOf="@id/textView" />
 
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/etDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -61,7 +61,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etEmail" />
+                app:layout_constraintTop_toBottomOf="@id/etTitre" />
 
             <TextView
                 android:id="@+id/loginError"
@@ -73,12 +73,12 @@
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/etPassword"
-                app:layout_constraintStart_toStartOf="@+id/etPassword"
-                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+                app:layout_constraintEnd_toEndOf="@+id/etDescription"
+                app:layout_constraintStart_toStartOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnAdd"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -104,7 +104,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/tvOr"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+                app:layout_constraintTop_toBottomOf="@id/btnAdd" />
 
             <TextView
                 android:id="@+id/tvOr"

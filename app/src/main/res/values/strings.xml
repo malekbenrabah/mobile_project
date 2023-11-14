@@ -1,4 +1,16 @@
 <resources>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
     <string name="app_name">mobile_project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -47,25 +59,27 @@
     </string>
 
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="regions_array">
+        <item>Tunis</item>
+        <item>Sousse</item>
     </string-array>
-    <string name="title_activity_admin">AdminActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string-array name="tunis_villes_array">
+        <item>Ariana</item>
+        <item>La Marsa</item>
+    </string-array>
+
+    <string-array name="sousse_villes_array">
+        <item>Sousse City</item>
+        <item>Monastir</item>
+    </string-array>
+
+    <string-array name="empty_array" />
+
+    <string-array name="type_post_array">
+        <item>Lost</item>
+        <item>Found</item>
+    </string-array>
+
+    <string name="title_activity_add_post">AddPostActivity</string>
 </resources>

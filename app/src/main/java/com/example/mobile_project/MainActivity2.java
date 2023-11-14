@@ -8,6 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mobile_project.session.SessionManager;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.content.Intent;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -58,16 +63,30 @@ public class MainActivity2 extends AppCompatActivity {
                 finish();
             } else if (item.getItemId() == R.id.chat) {
                 loadFragment(new ChatFragment());
+            }  else if (item.getItemId()== R.id.posts) {
+                loadFragment(new AllUserPostsFragment());
+                return true;
             }
             return true;
         });
 
-        floatingActionButton = findViewById(R.id.fab);
+        floatingActionButton = findViewById(R.id.faba);
         floatingActionButton.setOnClickListener(view -> {
             loadFragment(new PostFragment());
         });
 
         loadFragment(new HomeFragment());
+
+
+        //get fragement
+        if (getIntent().hasExtra("fragmentToLoad")) {
+            String fragmentToLoad = getIntent().getStringExtra("fragmentToLoad");
+            if (fragmentToLoad.equals("PostFragment")) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame, new PostFragment())
+                        .commit();
+            }
+        }
     }
 
     private void loadFragment(Fragment fragment) {

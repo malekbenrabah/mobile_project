@@ -38,4 +38,6 @@ public interface UserDao {
 
     @Delete
     void deleteUser(User user);
+    @Query("SELECT * FROM user WHERE id=:id")
+    User getUserById(int id);
 }

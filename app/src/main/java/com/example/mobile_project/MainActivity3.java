@@ -64,13 +64,16 @@ public class MainActivity3 extends AppCompatActivity {
                 if (user != null) {
                     sessionManager.createSession(user.getId(), user.getUserName(), email, String.valueOf(user.getPhone()), user.getPassword(), user.getPhoto(), user.isAdmin());
                     runOnUiThread(() -> {
+
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putInt("userId", user.getId());
                         if (rememberMe.isChecked()) {
                             // Store the username and password in shared preferences
-                            SharedPreferences.Editor editor = sp.edit();
                             editor.putString("userName", user.getUserName());
                             editor.putString("pwd", password);
                             editor.apply();
                         }
+                        editor.apply();
 
                         Intent intent = new Intent(this, MainActivity2.class);
                         startActivity(intent);
