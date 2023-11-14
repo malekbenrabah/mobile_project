@@ -33,6 +33,8 @@ public class Post {
     @ColumnInfo(name = "userId")
     private int userId;
 
+    private int likes;
+    private int dislikes;
     public Post() {
     }
 
@@ -136,6 +138,22 @@ public class Post {
 
     public void setPost_type(String post_type) {
         this.post_type = post_type;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
     }
 
     @Override

@@ -61,6 +61,27 @@ public class AllUserPostsFragment extends Fragment  implements OnDeletePostListe
 
         recyclerView.setAdapter(postAdapter);
 
+        postAdapter.setOnLikeDislikeClickListener(new PostsUserAdapater.OnLikeDislikeClickListener() {
+            @Override
+            public void onLikeClick(int position) {
+                Post post = postAdapter.getItem(position);
+                int currentLikes = post.getLikes();
+                post.setLikes(currentLikes + 1);
+
+
+                postAdapter.notifyItemChanged(position);
+            }
+
+            @Override
+            public void onDislikeClick(int position) {
+                Post post = postAdapter.getItem(position);
+                int currentDislikes = post.getDislikes();
+                post.setDislikes(currentDislikes + 1);
+
+
+                postAdapter.notifyItemChanged(position);
+            }
+        });
 
         sp = getActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         int userId = sp.getInt("userId", -1);

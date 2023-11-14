@@ -3,6 +3,7 @@ package com.example.mobile_project.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +35,17 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
 
     private UpdatePostListener updatePostListener;
 
+    private OnLikeDislikeClickListener likeDislikeClickListener;
+
+    public void setOnLikeDislikeClickListener(OnLikeDislikeClickListener listener) {
+        this.likeDislikeClickListener = listener;
+    }
+
+    public interface OnLikeDislikeClickListener {
+        void onLikeClick(int position);
+        void onDislikeClick(int position);
+    }
+
     public PostsUserAdapater(List<Post> postList, OnDeletePostListener deletePostListener , UpdatePostListener updatePostListener) {
         this.postList = postList;
         this.deletePostListener = deletePostListener;
@@ -52,6 +64,8 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
         TextView descriptionTextView;
         TextView postTypeTextView;
         TextView dateTextView;
+        TextView likeCountTextView ;
+        TextView dislikeCountTextView;
 
         TextView locationTextView;
 
@@ -60,6 +74,8 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
         ImageView deleteButton;
 
         ImageView updateButton;
+        Button likeButton;
+        Button dislikeButton;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +85,10 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
             dateTextView = itemView.findViewById(R.id.post_created_at);
             postImageView = itemView.findViewById(R.id.post_image);
             locationTextView = itemView.findViewById(R.id.post_location);
+            likeButton = itemView.findViewById(R.id.likeButton);
+            dislikeButton = itemView.findViewById(R.id.dislikeButton);
+            likeCountTextView = itemView.findViewById(R.id.likeCountTextView);
+            dislikeCountTextView = itemView.findViewById(R.id.dislikeCountTextView);
 
             //delete
             deleteButton= itemView.findViewById(R.id.post_trash);
@@ -122,9 +142,24 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
                     .placeholder(R.drawable.photos) // Placeholder image while loading
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(holder.postImageView);
+            int likeCount = post.getLikes();
+            holder.likeCountTextView.setText("Likes: " + likeCount);
+            int dislikeCount = post.getDislikes();
+            holder.dislikeCountTextView.setText("Dislikes: " + dislikeCount);
 
 
         }
+        holder.likeButton.setOnClickListener(v -> {
+            if (likeDislikeClickListener != null) {
+                likeDislikeClickListener.onLikeClick(position);
+            }
+        });
+
+        holder.dislikeButton.setOnClickListener(v -> {
+            if (likeDislikeClickListener != null) {
+                likeDislikeClickListener.onDislikeClick(position);
+            }
+        });
     }
 
     @Override
@@ -132,7 +167,7 @@ public class PostsUserAdapater extends RecyclerView.Adapter<PostsUserAdapater.Po
         return postList != null ? postList.size() : 0;
     }
 
-
-
-
+    public Post getItem(int position) {
+        return postList != null && position < postList.size() ? postList.get(position) : null;
+    }
 }

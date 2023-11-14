@@ -23,7 +23,7 @@ import com.example.mobile_project.entity.User;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Post.class, Commentaire.class, Chat.class, ChatMessage.class}, version = 8)
+@Database(entities = {User.class, Post.class, Commentaire.class, Chat.class, ChatMessage.class}, version = 9)
 @AutoMigration(from = 1, to = 2)
 public abstract class AppDatabase extends RoomDatabase {
     public static final Executor databaseWriteExecutor = Executors.newSingleThreadExecutor();

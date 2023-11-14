@@ -18,6 +18,8 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
 import com.example.mobile_project.databinding.ActivityAdminBinding;
 
 import java.util.HashMap;
@@ -37,15 +39,9 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarAdmin.toolbar);
-        binding.appBarAdmin.fab.setOnClickListener(new View.OnClickListener() {
-                                                       @Override
-                                                       public void onClick(View view) {
-                                                           Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                                                   .setAction("Action", null).show();
-                                                       }
-                                                   });
 
-                drawer = binding.drawerLayout; // Initialize the drawer variable
+        // Initialize the navigation drawer and ActionBarDrawerToggle
+        drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_user_home, R.id.nav_users, R.id.nav_posts)
@@ -62,10 +58,18 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        /*SessionManager sessionManager = new SessionManager(getApplicationContext);
-        HashMap<String, String> user = sessionManager.getUserDetails();
-        String username = user.get(SessionManager.KEY_USERNAME);
-        String email = user.get(SessionManager.KEY_EMAIL);*/
+        // Load user details from SessionManager
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        String username = sessionManager.getUserName();
+        String email = sessionManager.getEmail();
+
+        // Populate the views with user details
+        View headerView = navigationView.getHeaderView(0);
+        TextView usernameTextView = headerView.findViewById(R.id.userName);
+        TextView emailTextView = headerView.findViewById(R.id.email);
+
+        usernameTextView.setText(username);
+        emailTextView.setText(email);
     }
 
     @Override
